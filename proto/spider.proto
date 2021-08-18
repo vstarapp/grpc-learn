@@ -1,0 +1,26 @@
+// 声明proto的版本 只有 proto3 才支持 gRPC
+syntax="proto3";
+// 将编译后文件输出在 proto 目录
+option go_package = "./proto";
+
+
+// 指定当前proto文件属于helloworld包
+package spider;
+
+// 定义一个名叫Greeter服务
+service Spider{
+    // 该服务包含一个 SayHello 方法 HelloRequest、HelloReply分别为该方法的输入与输出
+    rpc GetAddressResponse(SpiderRequest)returns(SpiderResponse){
+    }
+}
+
+// 具体的参数定义
+message SpiderRequest{
+    string address = 1;  // 要请求的地址
+    string method = 2; // 请求方式
+}
+
+message SpiderResponse{
+    int32 httpCode = 1; // http状态码
+    string response = 2; // 返回体
+}
